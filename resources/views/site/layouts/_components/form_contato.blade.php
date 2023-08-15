@@ -1,4 +1,4 @@
-<form action={{route('site.contato')}} metthod = "post" >
+<form action={{route('site.contato')}} metthod = "POST" >
 
     @csrf
 

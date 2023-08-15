@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUnidadesTable extends Migration
+class TabelaUnidades extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUnidadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('unidade', function (Blueprint $table) {
+        Schema::create('und', function (Blueprint $table) {
             $table->id();
             $table->string('unidade',5);
             $table->string('descricao',30);  
@@ -23,13 +23,13 @@ class CreateUnidadesTable extends Migration
         Schema::table('produtos', function (Blueprint $table){
 
             $table->unsignedBigInteger('unidade_id');
-            $table->foreign('unidade_id')->references('id')->on('unidades');
+            $table->foreign('unidade_id')->references('id')->on('und');
         });
 
-        Schema::table('produto_datalhes', function (Blueprint $table){
+        Schema::table('produto_detalhes', function (Blueprint $table){
 
-            $table->unsignedBigInteger('unidade_id');
-            $table->foreign('unidade_id')->references('id')->on('unidades');
+            $table->unsignedBigInteger('uni_id');
+            $table->foreign('uni_id')->references('id')->on('und');
         });
 
     }
@@ -52,12 +52,12 @@ class CreateUnidadesTable extends Migration
 
         Schema::table('produtos', function (Blueprint $table){
 
-            $table->dropForeign('produto_unidade_id_foreign');
+            $table->dropForeign('produtos_unidade_id_foreign');
 
             $table->dropColumn('unidade_id');
 
         });
 
-        Schema::dropIfExists('unidades');
+        Schema::dropIfExists('unidade');
     }
 }
